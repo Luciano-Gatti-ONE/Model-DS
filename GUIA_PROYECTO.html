@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Gu&iacute;a del Proyecto FlightOnTime - Explicaci&oacute;n Simple</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="guía-del-proyecto-flightontime---explicación-simple">Guía del Proyecto FlightOnTime - Explicación Simple</h1>
+<p><strong>Equipo</strong>: MODELS THAT MATTER - Grupo 59<br>
+<strong>Proyecto</strong>: FlightOnTime ✈️ — Predicción de Retrasos de Vuelos<br>
+<strong>Fecha</strong>: Diciembre 2025</p>
+<hr>
+<h2 id="-qué-es-este-proyecto">🎯 ¿Qué es este proyecto?</h2>
+<p>Este es un <strong>sistema inteligente</strong> que predice si un vuelo se va a retrasar.</p>
+<p><strong>Analogía simple</strong>: Es como tener un meteorólogo experto, pero en vez de predecir el clima, predice retrasos de vuelos basándose en patrones históricos.</p>
+<hr>
+<h2 id="-estructura-del-proyecto-qué-hay-en-cada-carpeta">📁 Estructura del Proyecto (¿Qué hay en cada carpeta?)</h2>
+<pre><code>flight-delay-prediction/
+├── 📄 README.md
+├── 📄 requirements.txt
+├── 📄 .gitignore
+├── 📂 data/
+├── 📂 notebooks/
+├── 📂 src/
+├── 📂 models/
+└── 📂 outputs/
+</code></pre>
+<hr>
+<h2 id="-archivos-en-la-raíz-los-documentos-principales">📄 Archivos en la Raíz (Los documentos principales)</h2>
+<h3 id="1-readmemd---manual-de-usuario">1. <a href="http://README.html">README.md</a> - &quot;Manual de Usuario&quot;</h3>
+<p><strong>¿Qué es?</strong> El manual de instrucciones del proyecto.</p>
+<p><strong>Analogía</strong>: Como el manual que viene con un electrodoméstico nuevo.</p>
+<p><strong>Contiene</strong>:</p>
+<ul>
+<li>Qué hace el proyecto</li>
+<li>Cómo instalarlo</li>
+<li>Cómo usarlo</li>
+<li>Resultados del modelo (78.55% de precisión)</li>
+<li>Contactos del equipo</li>
+</ul>
+<p><strong>¿Para quién?</strong> Cualquier persona que quiera entender o usar el proyecto.</p>
+<hr>
+<h3 id="2-requirementstxt---lista-de-ingredientes">2. requirements.txt - &quot;Lista de Ingredientes&quot;</h3>
+<p><strong>¿Qué es?</strong> Lista de programas/librerías que necesita el proyecto para funcionar.</p>
+<p><strong>Analogía</strong>: Como una lista de ingredientes para una receta. Si quieres cocinar el platillo (ejecutar el proyecto), necesitas todos los ingredientes.</p>
+<p><strong>Ejemplo de contenido</strong>:</p>
+<pre><code>numpy&gt;=1.24.0          # Herramienta para matemáticas
+pandas&gt;=2.0.0          # Herramienta para datos
+xgboost&gt;=2.0.0         # El &quot;cerebro&quot; del modelo
+</code></pre>
+<p><strong>¿Para quién?</strong> Técnicos que van a instalar el proyecto.</p>
+<hr>
+<h3 id="3-gitignore---lista-de-lo-que-no-compartir">3. .gitignore - &quot;Lista de lo que NO Compartir&quot;</h3>
+<p><strong>¿Qué es?</strong> Le dice al sistema de control de versiones (Git) qué archivos NO subir al repositorio.</p>
+<p><strong>Analogía</strong>: Como decirle a alguien &quot;cuando hagas la copia de seguridad, NO incluyas mi carpeta de descargas&quot;.</p>
+<p><strong>¿Por qué?</strong> Para no compartir:</p>
+<ul>
+<li>Datos sensibles</li>
+<li>Archivos muy grandes</li>
+<li>Configuraciones personales</li>
+</ul>
+<p><strong>¿Para quién?</strong> Programadores que usan Git.</p>
+<hr>
+<h2 id="-data---la-bodega-de-datos">📂 data/ - &quot;La Bodega de Datos&quot;</h2>
+<p><strong>¿Qué es?</strong> Carpeta donde se guardan todos los datos del proyecto.</p>
+<p><strong>Analogía</strong>: Como el almacén de un supermercado donde guardan la mercancía.</p>
+<h3 id="subcarpetas">Subcarpetas:</h3>
+<h4 id="-dataraw---productos-sin-procesar">📁 data/raw/ - &quot;Productos sin procesar&quot;</h4>
+<ul>
+<li><strong>Contiene</strong>: Datos originales, tal como llegaron</li>
+<li><strong>Ejemplo</strong>: <code>flights_with_weather_complete.parquet</code> (7+ millones de vuelos)</li>
+<li><strong>Regla</strong>: NUNCA modificar estos archivos, son la fuente original</li>
+<li><strong>Analogía</strong>: Como los ingredientes frescos que acabas de comprar</li>
+</ul>
+<h4 id="-dataprocessed---productos-listos-para-usar">📁 data/processed/ - &quot;Productos listos para usar&quot;</h4>
+<ul>
+<li><strong>Contiene</strong>: Datos ya limpios y preparados</li>
+<li><strong>Ejemplo</strong>: <code>train.parquet</code>, <code>test.parquet</code></li>
+<li><strong>Función</strong>: Datos listos para entrenar el modelo</li>
+<li><strong>Analogía</strong>: Como verduras ya lavadas y cortadas, listas para cocinar</li>
+</ul>
+<hr>
+<h2 id="-notebooks---cuadernos-de-laboratorio">📂 notebooks/ - &quot;Cuadernos de Laboratorio&quot;</h2>
+<p><strong>¿Qué es?</strong> Carpeta para análisis interactivos y exploraciones.</p>
+<p><strong>Analogía</strong>: Como un cuaderno de científico donde anota experimentos, hace gráficas y prueba ideas.</p>
+<p><strong>Tipo de archivos</strong>: <code>.ipynb</code> (Jupyter Notebooks)</p>
+<p><strong>¿Qué se hace aquí?</strong></p>
+<ol>
+<li>
+<p><strong>Exploración de datos</strong> (EDA):</p>
+<ul>
+<li>Ver cómo se ven los datos</li>
+<li>Hacer gráficas</li>
+<li>Buscar patrones</li>
+</ul>
+</li>
+<li>
+<p><strong>Experimentos</strong>:</p>
+<ul>
+<li>Probar ideas nuevas</li>
+<li>Entrenar modelos de prueba</li>
+<li>Comparar diferentes enfoques</li>
+</ul>
+</li>
+</ol>
+<p><strong>¿Para quién?</strong></p>
+<ul>
+<li>Data scientists que quieren experimentar</li>
+<li>Personas que prefieren trabajar de forma visual e interactiva</li>
+</ul>
+<p><strong>Estado actual</strong>: Vacío (listo para que crees tus notebooks)</p>
+<hr>
+<h2 id="-src---el-código-organizado-la-cocina">📂 src/ - &quot;El Código Organizado&quot; (La Cocina)</h2>
+<p><strong>¿Qué es?</strong> El corazón del proyecto. Todo el código Python organizado en módulos.</p>
+<p><strong>Analogía</strong>: Como una cocina profesional donde cada ingrediente tiene su lugar y cada chef tiene su estación.</p>
+<p><strong>¿Por qué organizar así?</strong></p>
+<ul>
+<li>✅ Fácil de entender</li>
+<li>✅ Fácil de mantener</li>
+<li>✅ Reutilizable</li>
+<li>✅ Profesional</li>
+</ul>
+<h3 id="los-5-módulos-archivos-python">Los 5 Módulos (Archivos Python):</h3>
+<h4 id="1-configpy---el-panel-de-control">1. <code>config.py</code> - &quot;El Panel de Control&quot;</h4>
+<p><strong>¿Qué hace?</strong> Define TODAS las configuraciones del proyecto en un solo lugar.</p>
+<p><strong>Analogía</strong>: Como el panel de control en un avión - todos los ajustes importantes en un solo lugar.</p>
+<p><strong>Contiene</strong>:</p>
+<ul>
+<li>📍 Rutas de archivos</li>
+<li>🎯 Parámetros del modelo</li>
+<li>🔧 Configuraciones de entrenamiento</li>
+<li>📊 Umbrales de predicción</li>
+</ul>
+<p><strong>Ejemplo</strong>:</p>
+<pre><code class="language-python">DELAY_THRESHOLD = <span class="hljs-number">15</span>        <span class="hljs-comment"># Cuántos minutos = retraso</span>
+SAMPLE_SIZE = <span class="hljs-number">500000</span>        <span class="hljs-comment"># Cuántos datos usar</span>
+CLASSIFICATION_THRESHOLD = <span class="hljs-number">0.25</span>  <span class="hljs-comment"># Sensibilidad del modelo</span>
+</code></pre>
+<p><strong>Ventaja</strong>: Si quieres cambiar algo, solo editas este archivo, no 20 archivos diferentes.</p>
+<hr>
+<h4 id="2-preprocessingpy---la-limpieza">2. <code>preprocessing.py</code> - &quot;La Limpieza&quot;</h4>
+<p><strong>¿Qué hace?</strong> Limpia y prepara los datos brutos.</p>
+<p><strong>Analogía</strong>: Como lavar y pelar las verduras antes de cocinar.</p>
+<p><strong>Funciones principales</strong>:</p>
+<ul>
+<li><code>load_data()</code> → Cargar datos desde archivo</li>
+<li><code>clean_data()</code> → Eliminar datos malos/inválidos</li>
+<li><code>impute_missing_values()</code> → Rellenar huecos (datos faltantes)</li>
+<li><code>split_data()</code> → Dividir en entrenamiento/prueba</li>
+</ul>
+<p><strong>¿Por qué es necesario?</strong></p>
+<ul>
+<li>Los datos reales siempre tienen errores</li>
+<li>Hay valores faltantes</li>
+<li>Necesitamos datos limpios para entrenar</li>
+</ul>
+<p><strong>Ejemplo de lo que hace</strong>:</p>
+<pre><code>Datos sucios:
+- Vuelo sin hora de salida ❌
+- Clima = &quot;N/A&quot; ❌
+- Vuelo cancelado (pero queremos solo operados) ❌
+
+↓ [preprocessing.py hace su magia]
+
+Datos limpios:
+- Solo vuelos completos ✅
+- Clima rellenado con promedio ✅
+- Solo vuelos operados ✅
+</code></pre>
+<hr>
+<h4 id="3-featurespy---el-creativo">3. <code>features.py</code> - &quot;El Creativo&quot;</h4>
+<p><strong>¿Qué hace?</strong> Crea características nuevas a partir de los datos originales.</p>
+<p><strong>Analogía</strong>: Como un chef que combina ingredientes básicos para crear nuevos sabores.</p>
+<p><strong>Funciones principales</strong>:</p>
+<ul>
+<li><code>create_temporal_features()</code> → Extrae hora, día, mes, etc.</li>
+<li><code>create_derived_features()</code> → Crea diferencias (ej: clima origen - clima destino)</li>
+<li><code>encode_categorical_features()</code> → Convierte texto en números</li>
+</ul>
+<p><strong>Ejemplo de transformaciones</strong>:</p>
+<p><strong>Dato original</strong>:</p>
+<pre><code>Fecha: &quot;2024-06-15&quot;
+</code></pre>
+<p><strong>Features creadas</strong>:</p>
+<pre><code>→ month: 6 (Junio)
+→ day_of_week: 5 (Viernes)
+→ quarter: 2 (Q2)
+→ is_weekend: 1 (Sí)
+→ is_summer: 1 (Temporada alta)
+</code></pre>
+<p><strong>¿Por qué?</strong> El modelo aprende mejor con estas características derivadas.</p>
+<hr>
+<h4 id="4-modelingpy---el-cerebro">4. <code>modeling.py</code> - &quot;El Cerebro&quot;</h4>
+<p><strong>¿Qué hace?</strong> Entrena y usa el modelo de predicción.</p>
+<p><strong>Analogía</strong>: Como entrenar a un perro para detectar algo - le enseñas con ejemplos hasta que aprende.</p>
+<p><strong>Funciones principales</strong>:</p>
+<ul>
+<li><code>create_model()</code> → Crea el modelo XGBoost</li>
+<li><code>train_model()</code> → Entrena con datos históricos</li>
+<li><code>save_model()</code> → Guarda el modelo entrenado</li>
+<li><code>load_model()</code> → Carga modelo guardado</li>
+<li><code>predict()</code> → Hace predicciones</li>
+</ul>
+<p><strong>El proceso de entrenamiento</strong>:</p>
+<pre><code>1. Recibe 500,000 vuelos históricos
+2. Aprende patrones:
+   - &quot;Vuelos viernes noche → más retrasos&quot;
+   - &quot;Lluvia fuerte → más retrasos&quot;
+   - &quot;Temporada navideña → más retrasos&quot;
+3. Se vuelve experto en predecir
+</code></pre>
+<p><strong>Resultado</strong>: Un modelo que detecta 78 de cada 100 retrasos.</p>
+<hr>
+<h4 id="5-evaluationpy---el-inspector-de-calidad">5. <code>evaluation.py</code> - &quot;El Inspector de Calidad&quot;</h4>
+<p><strong>¿Qué hace?</strong> Mide qué tan bueno es el modelo.</p>
+<p><strong>Analogía</strong>: Como un inspector de calidad que prueba productos y da calificaciones.</p>
+<p><strong>Funciones principales</strong>:</p>
+<ul>
+<li><code>calculate_metrics()</code> → Calcula precisión, recall, F1, etc.</li>
+<li><code>plot_confusion_matrix()</code> → Gráfica de aciertos/errores</li>
+<li><code>plot_roc_curve()</code> → Curva de rendimiento</li>
+<li><code>plot_feature_importance()</code> → Qué es más importante</li>
+<li><code>evaluate_model()</code> → Evaluación completa</li>
+</ul>
+<p><strong>Métricas que calcula</strong>:</p>
+<pre><code>✅ Accuracy: 80.39% (aciertos totales)
+✅ Precision: 50.73% (de las alarmas, cuántas son correctas)
+✅ Recall: 78.55% (de los retrasos reales, cuántos detecta)
+✅ F1-Score: 0.6165 (balance general)
+</code></pre>
+<p><strong>Visualizaciones que genera</strong>:</p>
+<ul>
+<li>Matriz de confusión (aciertos vs errores)</li>
+<li>Curva ROC (rendimiento general)</li>
+<li>Importancia de features (qué factores pesan más)</li>
+</ul>
+<hr>
+<h2 id="-models---el-producto-final">📂 models/ - &quot;El Producto Final&quot;</h2>
+<p><strong>¿Qué es?</strong> Carpeta donde se guardan los modelos entrenados.</p>
+<p><strong>Analogía</strong>: Como el freezer donde guardas la comida ya preparada, lista para calentar y servir.</p>
+<p><strong>Archivos guardados</strong>:</p>
+<h3 id="1-modeljoblib---el-cerebro-entrenado">1. <code>model.joblib</code> - &quot;El Cerebro Entrenado&quot;</h3>
+<ul>
+<li><strong>Tamaño</strong>: ~50-100 MB</li>
+<li><strong>Contiene</strong>: El modelo XGBoost completamente entrenado</li>
+<li><strong>Analogía</strong>: Como un chef experto congelado - cuando lo &quot;descongelas&quot; (cargas), ya sabe cocinar</li>
+</ul>
+<h3 id="2-scalerpkl---el-traductor-de-números">2. <code>scaler.pkl</code> - &quot;El Traductor de Números&quot;</h3>
+<ul>
+<li><strong>Función</strong>: Normaliza los números para que el modelo entienda mejor</li>
+<li><strong>Ejemplo</strong>: Convierte distancia 2500km y temperatura 25°C a la misma escala</li>
+</ul>
+<h3 id="3-label_encoderspkl---el-diccionario">3. <code>label_encoders.pkl</code> - &quot;El Diccionario&quot;</h3>
+<ul>
+<li><strong>Función</strong>: Convierte texto en números</li>
+<li><strong>Ejemplo</strong>:<pre><code>&quot;American Airlines&quot; → 0
+&quot;Delta&quot; → 1
+&quot;United&quot; → 2
+</code></pre>
+</li>
+</ul>
+<h3 id="4-metadatajson---la-ficha-técnica">4. <code>metadata.json</code> - &quot;La Ficha Técnica&quot;</h3>
+<ul>
+<li><strong>Contiene</strong>: Información del modelo
+<ul>
+<li>Fecha de creación</li>
+<li>Versión</li>
+<li>Parámetros usados</li>
+<li>Métricas de rendimiento</li>
+<li>Lista de features</li>
+</ul>
+</li>
+</ul>
+<p><strong>Analogía</strong>: Como la etiqueta de un producto que dice ingredientes, fecha de vencimiento, etc.</p>
+<hr>
+<h2 id="-outputs---los-resultados">📂 outputs/ - &quot;Los Resultados&quot;</h2>
+<p><strong>¿Qué es?</strong> Carpeta donde se guardan todos los resultados del modelo.</p>
+<p><strong>Analogía</strong>: Como el portafolio de un fotógrafo donde muestra su trabajo.</p>
+<h3 id="subcarpetas-1">Subcarpetas:</h3>
+<h4 id="-outputsfigures---las-fotos">📁 outputs/figures/ - &quot;Las Fotos&quot;</h4>
+<p><strong>Contiene</strong>: Gráficas y visualizaciones</p>
+<p><strong>Ejemplos</strong>:</p>
+<ul>
+<li><code>confusion_matrix.png</code> → Matriz de aciertos/errores</li>
+<li><code>roc_curve.png</code> → Curva de rendimiento</li>
+<li><code>feature_importance.png</code> → Qué factores son más importantes</li>
+</ul>
+<p><strong>¿Para qué?</strong> Presentaciones, reportes, entender visualmente cómo funciona el modelo.</p>
+<h4 id="-outputsmetrics---los-números">📁 outputs/metrics/ - &quot;Los Números&quot;</h4>
+<p><strong>Contiene</strong>: Métricas en formato JSON</p>
+<p><strong>Ejemplo</strong> (<code>model_metrics.json</code>):</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;timestamp&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2025-12-29 10:00:00&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;threshold&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.25</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;metrics&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;accuracy&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.8039</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;precision&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.5073</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;recall&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.7855</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;f1_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.6165</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p><strong>¿Para qué?</strong> Seguimiento histórico, comparaciones, reportes automatizados.</p>
+<hr>
+<h2 id="-cómo-funcionan-juntos-todos-los-componentes">🔄 ¿Cómo Funcionan Juntos Todos los Componentes?</h2>
+<h3 id="el-flujo-completo-de-inicio-a-fin">El Flujo Completo (De Inicio a Fin):</h3>
+<pre><code>1. 📂 data/raw/
+   ↓
+   [Datos originales de vuelos]
+   
+2. 📂 src/preprocessing.py
+   ↓
+   [Limpia y prepara datos]
+   
+3. 📂 src/features.py
+   ↓
+   [Crea características útiles]
+   
+4. 📂 data/processed/
+   ↓
+   [Datos listos para entrenar]
+   
+5. 📂 src/modeling.py
+   ↓
+   [Entrena el modelo]
+   
+6. 📂 models/
+   ↓
+   [Modelo guardado]
+   
+7. 📂 src/evaluation.py
+   ↓
+   [Evalúa rendimiento]
+   
+8. 📂 outputs/
+   ↓
+   [Resultados finales: gráficas + métr icas]
+</code></pre>
+<h3 id="como-una-receta-de-cocina">Como una Receta de Cocina:</h3>
+<ol>
+<li><strong>Ingredientes</strong> (<code>data/raw/</code>) → Datos crudos</li>
+<li><strong>Preparación</strong> (<code>preprocessing.py</code>) → Lavar y cortar</li>
+<li><strong>Mezcla</strong> (<code>features.py</code>) → Combinar ingredientes</li>
+<li><strong>Cocción</strong> (<code>modeling.py</code>) → Entrenar el modelo</li>
+<li><strong>Producto Final</strong> (<code>models/</code>) → Platillo listo</li>
+<li><strong>Prueba de Sabor</strong> (<code>evaluation.py</code>) → ¿Qué tal quedó?</li>
+<li><strong>Presentación</strong> (<code>outputs/</code>) → Servir en plato bonito</li>
+</ol>
+<hr>
+<h2 id="-para-diferentes-audiencias">🎓 Para Diferentes Audiencias</h2>
+<h3 id="si-eres-gerentedirectivo">Si eres Gerente/Directivo:</h3>
+<p><strong>Lee</strong>:</p>
+<ul>
+<li>✅ Este documento (GUÍA_PROYECTO.md)</li>
+<li>✅ <a href="http://README.html">README.md</a> (sección de resultados)</li>
+<li>✅ <code>outputs/figures/</code> (ver gráficas)</li>
+</ul>
+<p><strong>Ignora</strong>:</p>
+<ul>
+<li>❌ Archivos .py (código técnico)</li>
+<li>❌ requirements.txt</li>
+<li>❌ .gitignore</li>
+</ul>
+<hr>
+<h3 id="si-eres-analistausuario-de-negocio">Si eres Analista/Usuario de Negocio:</h3>
+<p><strong>Lee</strong>:</p>
+<ul>
+<li>✅ Este documento</li>
+<li>✅ <a href="http://README.html">README.md</a></li>
+<li>✅ <code>outputs/metrics/</code> (números de rendimiento)</li>
+</ul>
+<p><strong>Explora</strong>:</p>
+<ul>
+<li>🔍 <code>notebooks/</code> (si quieres hacer análisis propios)</li>
+</ul>
+<hr>
+<h3 id="si-eres-desarrolladordata-scientist">Si eres Desarrollador/Data Scientist:</h3>
+<p><strong>Lee</strong>:</p>
+<ul>
+<li>✅ Todo este documento</li>
+<li>✅ <a href="http://README.html">README.md</a> (documentación técnica)</li>
+<li>✅ Código en <code>src/</code> (entender la implementación)</li>
+</ul>
+<p><strong>Usa</strong>:</p>
+<ul>
+<li>🔧 <code>src/config.py</code> (ajustar parámetros)</li>
+<li>🔧 <code>notebooks/</code> (experimentar)</li>
+<li>🔧 Todos los módulos</li>
+</ul>
+<hr>
+<h2 id="-resumen-visual">📊 Resumen Visual</h2>
+<pre><code>┌────────────────────────────────────────────┐
+│  flight-delay-prediction/                 │
+│  (El Sistema Completo)                     │
+└────────────────────────────────────────────┘
+        │
+        ├─── 📄 Documentos (README, etc.)
+        │    └─ &quot;Manual de usuario&quot;
+        │
+        ├─── 📂 data/
+        │    ├─ raw/ → &quot;Ingredientes crudos&quot;
+        │    └─ processed/ → &quot;Ingredientes preparados&quot;
+        │
+        ├─── 📂 src/ (El código organizado)
+        │    ├─ config.py → &quot;Panel de control&quot;
+        │    ├─ preprocessing.py → &quot;Limpieza&quot;
+        │    ├─ features.py → &quot;Creativo&quot;
+        │    ├─ modeling.py → &quot;Cerebro&quot;
+        │    └─ evaluation.py → &quot;Inspector&quot;
+        │
+        ├─── 📂 models/ → &quot;Producto final&quot;
+        │    └─ model.joblib (78.55% de recall!)
+        │
+        ├─── 📂 notebooks/ → &quot;Laboratorio&quot;
+        │    └─ Para experimentar
+        │
+        └─── 📂 outputs/ → &quot;Resultados&quot;
+             ├─ figures/ → Gráficas
+             └─ metrics/ → Números
+</code></pre>
+<hr>
+<h2 id="-preguntas-frecuentes">❓ Preguntas Frecuentes</h2>
+<p><strong>P: ¿Qué archivo es el más importante?</strong><br>
+R: <code>src/modeling.py</code> (el cerebro) y <code>models/model.joblib</code> (el modelo entrenado).</p>
+<p><strong>P: ¿Puedo borrar la carpeta <code>outputs/</code>?</strong><br>
+R: Sí, se puede regenerar. Pero <code>models/</code> NO - contiene el modelo que tomó horas entrenar.</p>
+<p><strong>P: ¿Necesito entender todo el código?</strong><br>
+R: No. Solo necesitas entender:</p>
+<ul>
+<li>Qué hace cada carpeta (este documento)</li>
+<li>Cómo usar el modelo (<a href="http://README.html">README.md</a>)</li>
+</ul>
+<p><strong>P: ¿Cómo empiezo a usar esto?</strong><br>
+R:</p>
+<ol>
+<li>Lee <a href="http://README.html">README.md</a></li>
+<li>Instala dependencias (<code>pip install -r requirements.txt</code>)</li>
+<li>Usa el modelo cargándolo desde <code>models/</code></li>
+</ol>
+<p><strong>P: ¿Dónde están los notebooks mencionados?</strong><br>
+R: No existen aún. Son sugerencias de lo que puedes crear. Ve a <code>notebooks/README.md</code> para instrucciones.</p>
+<hr>
+<h2 id="-conclusión">🚀 Conclusión</h2>
+<p>Este proyecto es como una <strong>fábrica bien organizada</strong>:</p>
+<ul>
+<li><strong>Entrada</strong>: Datos de vuelos (históricos)</li>
+<li><strong>Proceso</strong>: Limpieza → Features → Entrenamiento</li>
+<li><strong>Salida</strong>: Modelo que predice retrasos con 78.55% de precisión</li>
+</ul>
+<p><strong>Fortalezas</strong>:</p>
+<ul>
+<li>✅ Código profesional y organizado</li>
+<li>✅ Fácil de mantener</li>
+<li>✅ Bien documentado</li>
+<li>✅ Listo para producción</li>
+</ul>
+<p><strong>¿Siguiente paso?</strong><br>
+Lee el <code>README.md</code> principal para instrucciones de uso detalladas.</p>
+<hr>
+<p><strong>Documento creado por</strong>: MODELS THAT MATTER - Grupo 59<br>
+<strong>Última actualización</strong>: 29 de Diciembre, 2025<br>
+<strong>Versión</strong>: 1.0</p>
+
+            
+            
+        </body>
+        </html>

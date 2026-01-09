@@ -1,0 +1,153 @@
+{
+  "model_name": "Flight Delay Prediction Model",
+  "model_type": "XGBoost Classifier",
+  "version": "1.0",
+  "created_date": "2025-12-27",
+  "author": "Hollman",
+  "description": "Modelo predictivo para anticipar retrasos de vuelos mayores a 15 minutos utilizando datos de vuelos 2024 y variables meteorológicas",
+  "target_variable": "is_delayed",
+  "target_description": "Clasificación binaria: 1 si el vuelo tiene retraso >15 minutos, 0 si llega a tiempo",
+  "delay_threshold_minutes": 15,
+  "dataset": {
+    "source": "flights_with_weather_complete.parquet",
+    "total_records": 7079081,
+    "training_sample": 500000,
+    "train_split": 400000,
+    "test_split": 100000,
+    "class_distribution": {
+      "on_time": 0.7987,
+      "delayed": 0.2013
+    }
+  },
+  "features": {
+    "total_features": 25,
+    "numeric_features": 20,
+    "categorical_features": 5,
+    "feature_list": [
+      "distance",
+      "crs_elapsed_time",
+      "month",
+      "day_of_week",
+      "day_of_month",
+      "quarter",
+      "is_weekend",
+      "hour",
+      "hour_sin",
+      "hour_cos",
+      "origin_weather_tavg",
+      "origin_weather_prcp",
+      "origin_weather_wspd",
+      "origin_weather_pres",
+      "dest_weather_tavg",
+      "dest_weather_prcp",
+      "dest_weather_wspd",
+      "dest_weather_pres",
+      "temp_diff",
+      "prcp_diff",
+      "op_unique_carrier_encoded",
+      "origin_encoded",
+      "dest_encoded",
+      "time_of_day_encoded",
+      "distance_category_encoded"
+    ],
+    "top_features": [
+      "distance",
+      "crs_elapsed_time",
+      "origin_encoded",
+      "dest_encoded",
+      "hour",
+      "op_unique_carrier_encoded",
+      "month",
+      "origin_weather_tavg",
+      "dest_weather_prcp",
+      "day_of_week"
+    ]
+  },
+  "hyperparameters": {
+    "n_estimators": 100,
+    "max_depth": 10,
+    "learning_rate": 0.1,
+    "random_state": 42,
+    "eval_metric": "logloss"
+  },
+  "performance_metrics": {
+    "accuracy": 0.8139,
+    "precision": 0.6472,
+    "recall": 0.1653,
+    "f1_score": 0.2633,
+    "roc_auc": 0.7366
+  },
+  "model_comparison": {
+    "XGBoost": {
+      "accuracy": 0.8139,
+      "f1_score": 0.2633,
+      "roc_auc": 0.7366,
+      "status": "SELECTED"
+    },
+    "LightGBM": {
+      "accuracy": 0.8091,
+      "f1_score": 0.19,
+      "roc_auc": 0.7222
+    },
+    "Random Forest": {
+      "accuracy": 0.8099,
+      "f1_score": 0.1976,
+      "roc_auc": 0.7138
+    },
+    "Logistic Regression": {
+      "accuracy": 0.7996,
+      "f1_score": 0.042,
+      "roc_auc": 0.6567
+    }
+  },
+  "preprocessing": {
+    "scaler": "StandardScaler",
+    "encoding": "LabelEncoder",
+    "missing_value_strategy": "median_imputation",
+    "columns_dropped": [
+      "dest_weather_wdir",
+      "origin_weather_wdir",
+      "dest_weather_wpgt",
+      "origin_weather_wpgt",
+      "origin_weather_tsun",
+      "dest_weather_tsun",
+      "cancellation_code"
+    ]
+  },
+  "usage": {
+    "input_format": "DataFrame with 25 features",
+    "output_format": "Binary classification (0: on-time, 1: delayed)",
+    "prediction_method": "model.predict(X)",
+    "probability_method": "model.predict_proba(X)[:, 1]",
+    "required_files": [
+      "model.joblib",
+      "scaler.pkl",
+      "label_encoders.pkl",
+      "features.json"
+    ]
+  },
+  "recommendations": {
+    "next_steps": [
+      "Ajustar threshold de clasificación para mejorar recall",
+      "Entrenar con dataset completo (7M registros)",
+      "Implementar balanceo de clases (SMOTE)",
+      "Agregar features de delays históricos",
+      "Optimizar hiperparámetros con GridSearch"
+    ],
+    "limitations": [
+      "Baja recall (16.53%) - muchos retrasos no detectados",
+      "Entrenado solo con muestra de 500K registros",
+      "No incluye información de vuelos previos del mismo avión"
+    ]
+  },
+  "artifacts": {
+    "model_file": "model.joblib",
+    "scaler_file": "scaler.pkl",
+    "encoders_file": "label_encoders.pkl",
+    "features_file": "features.json",
+    "metrics_file": "model_metrics.json",
+    "eda_report": "eda_report.txt",
+    "walkthrough": "walkthrough.md",
+    "visualizations_folder": "plots/"
+  }
+}
