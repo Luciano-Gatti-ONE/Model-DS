@@ -76,17 +76,15 @@ python -m src.modeling
 ### 4. Hacer Predicciones
 
 ```python
-import joblib
 import pandas as pd
-from src.features import create_features
-from src.preprocessing import preprocess_data
+from src.modeling import load_model, predict
+from src.features import feature_engineering_pipeline
+from src.preprocessing import impute_missing_values
 
-# Cargar modelo
-model = joblib.load('models/model.joblib')
-scaler = joblib.load('models/scaler.pkl')
-encoders = joblib.load('models/label_encoders.pkl')
+# Cargar artifacts entrenados
+model, scaler, encoders = load_model()
 
-# Preparar datos
+# Preparar datos (mismas columnas que el dataset original)
 new_flight = pd.DataFrame([{
     'op_unique_carrier': 'AA',
     'origin': 'JFK',
@@ -94,22 +92,176 @@ new_flight = pd.DataFrame([{
     'crs_dep_time': 1800,  # 6:00 PM
     'fl_date': '2024-12-15',
     'distance': 2475,
+    'crs_elapsed_time': 360,
     'origin_weather_prcp': 0.5,
-    # ... otros campos
+    'origin_weather_tavg': 10.0,
+    'origin_weather_wspd': 12.0,
+    'origin_weather_pres': 1012.0,
+    'dest_weather_tavg': 18.0,
+    'dest_weather_prcp': 0.0,
+    'dest_weather_wspd': 8.0,
+    'dest_weather_pres': 1010.0,
+    # ... incluir el resto de columnas necesarias del dataset
 }])
 
-# Procesar
-X = preprocess_data(new_flight)
-X = create_features(X, encoders)
-X_scaled = scaler.transform(X)
+# Imputar y crear features como en entrenamiento
+new_flight = impute_missing_values(new_flight)
+X_fe, _ = feature_engineering_pipeline(new_flight, encoders=encoders, fit_encoders=False)
 
-# Predecir
-prediction = model.predict(X_scaled)
-probability = model.predict_proba(X_scaled)[:, 1]
+# Predecir con umbral configurado en src/config.py
+preds, probs = predict(model, scaler, X_fe)
 
-print(f"Predicción: {'Retraso' if prediction[0] == 1 else 'A tiempo'}")
-print(f"Probabilidad de retraso: {probability[0]:.2%}")
+print(f"Predicción: {'Retraso' if preds[0] == 1 else 'A tiempo'}")
+print(f"Probabilidad de retraso: {probs[0]:.2%}")
 ```
+
+## 🧭 Instrucciones completas para correr el modelo
+
+### 1. Requisitos previos
+- **Python 3.10+** recomendado.
+- Dependencias del sistema para compilar paquetes (por ejemplo, `build-essential` en Linux).
+- Archivo de datos en formato parquet: `data/raw/flights_with_weather_complete.parquet`.
+
+### 2. Configurar entorno
+
+```bash
+# (Opcional) crear entorno virtual
+python -m venv venv
+source venv/bin/activate  # En Windows: venv\Scripts\activate
+
+# Instalar dependencias
+pip install -r requirements.txt
+```
+
+### 3. Verificar estructura esperada
+
+```text
+data/
+  raw/
+    flights_with_weather_complete.parquet
+models/
+outputs/
+```
+
+> El pipeline crea automáticamente carpetas faltantes al ejecutar el entrenamiento.
+
+### 4. Ejecutar el pipeline de entrenamiento completo
+
+Este comando ejecuta preprocesamiento → feature engineering → split → entrenamiento → evaluación → guardado de artifacts:
+
+```bash
+python -m src.modeling
+```
+
+Al finalizar se generan:
+
+- `models/model.joblib`
+- `models/scaler.pkl`
+- `models/label_encoders.pkl`
+- `models/metadata.json`
+- Métricas y figuras en `outputs/metrics/` y `outputs/figures/`
+
+### 5. Ejecutar sólo inferencia con el modelo entrenado
+
+```python
+import pandas as pd
+from src.modeling import load_model, predict
+from src.features import feature_engineering_pipeline
+from src.preprocessing import impute_missing_values
+
+# Cargar artifacts entrenados
+model, scaler, encoders = load_model()
+
+# Preparar datos (mismas columnas que el dataset original)
+new_flight = pd.DataFrame([{
+    'op_unique_carrier': 'AA',
+    'origin': 'JFK',
+    'dest': 'LAX',
+    'crs_dep_time': 1800,
+    'fl_date': '2024-12-15',
+    'distance': 2475,
+    'origin_weather_prcp': 0.5,
+    'origin_weather_tavg': 10.0,
+    'origin_weather_wspd': 12.0,
+    'origin_weather_pres': 1012.0,
+    'dest_weather_tavg': 18.0,
+    'dest_weather_prcp': 0.0,
+    'dest_weather_wspd': 8.0,
+    'dest_weather_pres': 1010.0,
+    'crs_elapsed_time': 360,
+    # ... incluir el resto de columnas necesarias del dataset
+}])
+
+new_flight = impute_missing_values(new_flight)
+X_fe, _ = feature_engineering_pipeline(new_flight, encoders=encoders, fit_encoders=False)
+
+# Predicción con umbral configurado en src/config.py
+preds, probs = predict(model, scaler, X_fe)
+print(preds, probs)
+```
+
+### 6. Ejecutar el modelo vía API (FastAPI)
+
+> **Requisito**: haber entrenado el modelo (paso 4) y contar con los artifacts en `models/`.
+
+**Levantar el servidor:**
+
+```bash
+python -m src.api
+```
+
+La API queda disponible en `http://localhost:8000`.
+
+**Probar salud:**
+
+```bash
+curl http://localhost:8000/health
+```
+
+**Ejemplo de predicción:**
+
+```bash
+curl -X POST http://localhost:8000/predict \
+  -H "Content-Type: application/json" \
+  -d '{
+    "flight": {
+      "op_unique_carrier": "AA",
+      "origin": "JFK",
+      "dest": "LAX",
+      "crs_dep_time": 1800,
+      "fl_date": "2024-12-15",
+      "distance": 2475,
+      "crs_elapsed_time": 360,
+      "origin_weather_tavg": 10.0,
+      "origin_weather_prcp": 0.5,
+      "origin_weather_wspd": 12.0,
+      "origin_weather_pres": 1012.0,
+      "dest_weather_tavg": 18.0,
+      "dest_weather_prcp": 0.0,
+      "dest_weather_wspd": 8.0,
+      "dest_weather_pres": 1010.0
+    }
+  }'
+```
+
+La respuesta incluye:
+
+```json
+{
+  "prediction": 1,
+  "probability": 0.73,
+  "threshold": 0.25
+}
+```
+
+### 7. Ajustes recomendados (opcional)
+
+Edita `src/config.py` para:
+
+- `SAMPLE_SIZE`: tamaño de muestra (None = usar todos los registros)
+- `CLASSIFICATION_THRESHOLD`: umbral de clasificación
+- `XGBOOST_PARAMS`: hiperparámetros del modelo
+- `DELAY_THRESHOLD`: minutos de retraso para definir la clase positiva
 
 ## 📈 Features del Modelo
 
