@@ -24,7 +24,6 @@ REQUIRED_COLUMNS = [
     "crs_dep_time",
     "fl_date",
     "distance",
-    "crs_elapsed_time",
     "origin_weather_tavg",
     "origin_weather_prcp",
     "origin_weather_wspd",
@@ -34,6 +33,41 @@ REQUIRED_COLUMNS = [
     "dest_weather_wspd",
     "dest_weather_pres",
 ]
+
+ESTIMATED_SPEED_MPH = 500
+
+
+def estimate_crs_elapsed_time(distance: float) -> float:
+    """
+    Estima la duración programada del vuelo (minutos) a partir de la distancia.
+
+    Args:
+        distance: Distancia del vuelo en millas.
+
+    Returns:
+        Duración estimada en minutos.
+    """
+    return max((distance / ESTIMATED_SPEED_MPH) * 60, 1)
+
+
+def ensure_crs_elapsed_time(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Completa crs_elapsed_time cuando falta usando un estimado basado en la distancia.
+
+    Args:
+        df: DataFrame con un solo vuelo.
+
+    Returns:
+        DataFrame con crs_elapsed_time garantizado.
+    """
+    df_filled = df.copy()
+    if "crs_elapsed_time" not in df_filled.columns:
+        df_filled["crs_elapsed_time"] = df_filled["distance"].apply(estimate_crs_elapsed_time)
+    elif df_filled["crs_elapsed_time"].isnull().any():
+        df_filled["crs_elapsed_time"] = df_filled["crs_elapsed_time"].fillna(
+            df_filled["distance"].apply(estimate_crs_elapsed_time)
+        )
+    return df_filled
 
 
 # Tuple[Any, Any, Dict[str, Any]] = (modelo, scaler, encoders).
@@ -103,6 +137,7 @@ def predict_from_payload(df: pd.DataFrame) -> Tuple[int, float]:
         (prediction, probability)
     """
     validate_payload(df)
+    df = ensure_crs_elapsed_time(df)
     model, scaler, encoders = load_artifacts()
     df_features = build_features(df, encoders)
 

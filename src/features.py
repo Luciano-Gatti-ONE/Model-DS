@@ -36,9 +36,13 @@ def create_temporal_features(df: pd.DataFrame) -> pd.DataFrame:
     
     # Extraer componentes temporales
     df_fe['month'] = df_fe['fl_date'].dt.month
-    df_fe['day_of_week'] = df_fe['fl_date'].dt.dayofweek
-    df_fe['day_of_month'] = df_fe['fl_date'].dt.day
     df_fe['quarter'] = df_fe['fl_date'].dt.quarter
+
+    if 'day_of_week' not in df_fe.columns or df_fe['day_of_week'].isna().any():
+        df_fe['day_of_week'] = df_fe['fl_date'].dt.dayofweek
+    if 'day_of_month' not in df_fe.columns or df_fe['day_of_month'].isna().any():
+        df_fe['day_of_month'] = df_fe['fl_date'].dt.day
+
     df_fe['is_weekend'] = (df_fe['day_of_week'] >= 5).astype(int)
     
     # Hora de salida

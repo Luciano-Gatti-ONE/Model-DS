@@ -18,8 +18,19 @@ class FlightPayload(BaseModel):
     # Campos temporales/operacionales
     crs_dep_time: int = Field(..., description="Hora de salida programada en formato HHMM (ej: 1800).")
     fl_date: str = Field(..., description="Fecha del vuelo en formato YYYY-MM-DD.")
+    day_of_month: int | None = Field(
+        None,
+        description="Día del mes (1-31). Si no se envía, se deriva desde fl_date."
+    )
+    day_of_week: int | None = Field(
+        None,
+        description="Día de la semana (0=Lunes, 6=Domingo). Si no se envía, se deriva desde fl_date."
+    )
     distance: float = Field(..., description="Distancia del vuelo en millas.")
-    crs_elapsed_time: float = Field(..., description="Duración programada del vuelo en minutos.")
+    crs_elapsed_time: float | None = Field(
+        None,
+        description="Duración programada del vuelo en minutos. Si no se envía, se estima con la distancia."
+    )
 
     # Clima en origen
     origin_weather_tavg: float = Field(..., description="Temperatura media en origen.")
